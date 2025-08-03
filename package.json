@@ -1,0 +1,32 @@
+{
+  "name": "product-shop",
+  "version": "1.0.0",
+  "description": "A RESTful API for managing products built with Node.js, Express, and MongoDB",
+  "main": "backend/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon backend/index.js",
+    "start": "node backend/index.js"
+  },
+  "type": "module",
+  "keywords": [
+    "api",
+    "products",
+    "express",
+    "mongodb",
+    "rest"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^17.2.1",
+    "express": "^4.19.2",
+    "mongoose": "^8.17.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}
