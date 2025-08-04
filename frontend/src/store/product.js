@@ -5,6 +5,12 @@ export const useProductStore = create((set) => ({
 
   setProducts: (products) => set({ products }),
 
+  fetchProducts: async () => {
+    const response = await fetch("/api/products");
+    const data = await response.json();
+    set({ products: data.data });
+  },
+
   createProduct: async (product) => {
     if (!product.name || !product.price || !product.image) {
       return { success: false, message: "Please fill all fields" };
@@ -40,7 +46,7 @@ export const useProductStore = create((set) => ({
       }
 
       set((state) => ({
-        products: state.products.filter((product) => product.id !== id),
+        products: state.products.filter((product) => product._id !== id),
       }));
       return { success: true, message: "Product deleted successfully" };
     } catch (error) {
@@ -63,7 +69,9 @@ export const useProductStore = create((set) => ({
 
       const data = await response.json();
       set((state) => ({
-        products: state.products.map((p) => (p.id === id ? data : p)),
+        products: state.products.map((product) =>
+          product._id === id ? data.data : product
+        ),
       }));
       return { success: true, message: "Product updated successfully" };
     } catch (error) {
