@@ -6,9 +6,19 @@ export const useProductStore = create((set) => ({
   setProducts: (products) => set({ products }),
 
   fetchProducts: async () => {
-    const response = await fetch("/api/products");
-    const data = await response.json();
-    set({ products: data.data });
+    try {
+      const response = await fetch("/api/products");
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const data = await response.json();
+      set({ products: data.data });
+    } catch (error) {
+      console.error("Error fetching products:", error);
+      set({ products: [] });
+    }
   },
 
   createProduct: async (product) => {
